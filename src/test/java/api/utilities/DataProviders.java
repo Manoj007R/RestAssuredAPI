@@ -13,7 +13,7 @@ public class DataProviders {
 		
 		int rowcount = xl.getRowCount(path, "sheet1");
 		int columncount = xl.getCellCount(path, "sheet1", 1);
-		String apidata[][] = new String[rowcount][columncount];	
+		String apidata[][] = new String[rowcount-1][columncount];	
 		for(int i=1; i<rowcount; i++) {	
 			for(int j=0; j<columncount;j++) {
 				apidata[i-1][j] = xl.getCellData(path, "sheet1", i, j);
@@ -28,7 +28,7 @@ public class DataProviders {
 		XLUtility xl = new XLUtility();
 		
 		int rowcount = xl.getRowCount(path, "sheet1");
-		String apidata[] = new String[rowcount];
+		String apidata[] = new String[rowcount-1];
 		for(int i=1; i<rowcount; i++) {
 		apidata[i-1] = xl.getCellData(path, "sheet1", i, 1);
 	}
