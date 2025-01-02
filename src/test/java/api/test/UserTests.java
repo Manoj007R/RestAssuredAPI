@@ -1,5 +1,8 @@
 package api.test;
 
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -14,7 +17,8 @@ public class UserTests {
 
 	Faker faker;
 	User userpayload;
-
+	public Logger logger;
+	
 	@BeforeTest
 	public void setupData() {
 
@@ -29,11 +33,14 @@ public class UserTests {
 		userpayload.setPassword(faker.internet().password(5, 10));
 		userpayload.setPhone(faker.phoneNumber().cellPhone());
 		userpayload.setUserStatus(1);
+		
+		logger = LogManager.getLogger(this.logger);
 	}
 
 
 
 	  @Test(priority = 1) public void testpostUser() { 
+		  logger.info("***** Creation of User *****");
 		  Response response = Userendpoints.createUser(userpayload); 
 		  response.then().log().all();
 		  System.out.println(userpayload.getUsername());
@@ -49,6 +56,7 @@ public class UserTests {
 	
 	@Test(priority=3)
 	public void testUpdateUserByName() {
+		  logger.info("***** Update User *****");
 		userpayload.setFirstName(faker.address().firstName());
 		userpayload.setLastName(faker.address().lastName());
 		userpayload.setEmail(faker.internet().emailAddress());
